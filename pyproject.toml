@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "proxyspin"
+version = "0.1.0"
+description = "Rotating proxy pool for Scrapy, Playwright and requests — health tracking, ban detection, sticky sessions. Zero dependencies."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [{ name = "GProxy", email = "support@gproxy.net" }]
+keywords = [
+  "proxy", "rotating-proxies", "scrapy", "playwright", "requests",
+  "web-scraping", "proxy-rotation", "proxy-pool", "anti-ban",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Framework :: Scrapy",
+]
+
+[project.optional-dependencies]
+requests = ["requests>=2.25"]
+scrapy = ["scrapy>=2.5"]
+playwright = ["playwright>=1.30"]
+
+[project.scripts]
+proxyspin = "proxyspin.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/gproxynet/proxyspin"
+Issues = "https://github.com/gproxynet/proxyspin/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/proxyspin"]
