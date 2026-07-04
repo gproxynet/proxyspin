@@ -99,9 +99,23 @@ pool = ProxyPool([
 
 Any other provider works the same way — put its gateway or IP list into the pool.
 
+Want free proxies to test with? Bootstrap straight from a live public list:
+
+```python
+pool = ProxyPool.from_url("https://raw.githubusercontent.com/gproxynet/free-proxy-list/main/all.txt")
+```
+
+(Public proxies are unreliable by nature — fine for testing, not production.)
+
 ## Health model in one paragraph
 
 Every proxy starts healthy. `mark_failed` increments its failure streak; when the streak reaches `max_failures` (default 2) the proxy is benched for `cooldown * 2**overshoot` seconds (default base 60 s, capped at 1 h), then automatically rejoins rotation. `mark_ok` resets the streak. The Scrapy middleware and `RotatingSession` call these for you based on exceptions and ban codes; with Playwright you call them yourself since only your code knows what a "ban" looks like for your flow.
+
+## Related tools
+
+- [Proxy Switcher & Manager](https://github.com/gproxynet/proxy-switcher) — one-click proxy switcher for Chrome (HTTP/SOCKS5, bulk import, country flags)
+- [free-proxy-list](https://github.com/gproxynet/free-proxy-list) — a fresh sample of live public proxies, refreshed every 30 minutes
+- Need proxies that actually work? [gproxy.net](https://gproxy.net/?utm_source=github&utm_medium=repo&utm_campaign=proxyspin) — residential, mobile & an unlimited public pool
 
 ## License
 
